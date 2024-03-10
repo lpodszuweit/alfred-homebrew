@@ -40,7 +40,8 @@ function ensureCacheFolderExists() {
 function cacheIsOutdated(path) {
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
-	if (!cacheObj.exists()) return true;
+	console.log('cache', cacheObj.size());
+	if ((!cacheObj.exists()) || (cacheObj.size() == 0)) return true;
 	const cacheAgeDays = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
 	const cacheAgeThresholdDays = 7;
 	return cacheAgeDays > cacheAgeThresholdDays;
